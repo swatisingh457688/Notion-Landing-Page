@@ -1,0 +1,553 @@
+/*
+|--------------------------------------------------------------------------
+| Global Reset & Variables
+|--------------------------------------------------------------------------
+*/
+:root {
+    /* Base colors from the image design */
+    --color-dark-bg: #1A1A1A;
+    --color-light-bg: #F5F5F5;
+    --color-primary-text: #EBEBEB;
+    --color-secondary-text: #A9A9A9;
+    --color-accent-purple: #905987;
+    /* For 'Unlock' and 'Renaissance' */
+    --color-card-bg: #2C2C2C;
+    --color-border: #3A3A3A;
+    --color-button-bg: #EBEBEB;
+    --color-button-text: #1A1A1A;
+
+    /* Theme-specific variables (Default: Dark) */
+    --bg-color: var(--color-dark-bg);
+    --text-color: var(--color-primary-text);
+    --secondary-text-color: var(--color-secondary-text);
+    --card-bg-color: var(--color-card-bg);
+    --border-color: var(--color-border);
+
+    /* Responsive Font Sizing with clamp (Requirement 3) */
+    --h1-size: clamp(2.5rem, 8vw + 1rem, 5rem);
+    --subtitle-size: clamp(0.8rem, 1.5vw, 1.1rem);
+    --body-size: clamp(0.75rem, 1.2vw, 1rem);
+}
+
+/* Light Mode Toggle */
+.dark-mode {
+    --bg-color: var(--color-light-bg);
+    --text-color: #1A1A1A;
+    --secondary-text-color: #555555;
+    --card-bg-color: #FFFFFF;
+    --border-color: #CCCCCC;
+    --color-button-bg: #1A1A1A;
+    --color-button-text: #F5F5F5;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    /* Matching the font feel */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background-color 0.5s, color 0.5s;
+    /* Smooth transitions for Dark/Light mode (Bonus) */
+    min-height: 100vh;
+    display: grid;
+    /* Setting up the main body grid (even though main content is also grid) */
+    grid-template-rows: auto 1fr;
+    overflow-x: hidden;
+    margin: 0;
+  font-family: 'Inter', sans-serif;
+  overflow-y: scroll; /* allow scrolling */
+  scrollbar-width: none; /* Firefox */
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Header (Navigation) Layout
+|--------------------------------------------------------------------------
+| Uses CSS Grid
+*/
+.main-header {
+    /* GRID LAYOUT: Three columns for Logo, Nav, Buttons */
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    padding: 1rem clamp(1rem, 5vw, 4rem);
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-color);
+    /* Ensures it sits above main content */
+    z-index: 10;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-accent-purple);
+    display: grid;
+    /* Minor grid for logo alignment */
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.nav-menu {
+    /* GRID LAYOUT: Center the menu links */
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    color: var(--secondary-text-color);
+    text-decoration: none;
+    font-size: var(--body-size);
+    transition: color 0.3s;
+}
+
+.nav-menu a:hover {
+    color: var(--text-color);
+}
+
+.auth-buttons {
+    /* GRID LAYOUT: Arrange buttons */
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+.btn {
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    font-size: var(--body-size);
+    transition: transform 0.3s, background-color 0.3s, color 0.3s;
+}
+
+.btn-signup {
+    background-color: transparent;
+    border: 1px solid var(--text-color);
+    color: var(--text-color);
+}
+
+.btn-login {
+    background-color: var(--text-color);
+    color: var(--bg-color);
+    border: 1px solid var(--text-color);
+}
+
+/* Hover Interaction 1 (Buttons) */
+.btn:hover {
+    transform: scale(1);
+    /* Hover Interaction */
+    box-shadow: 0 0 10px rgba(144, 89, 135, 0.5);
+}
+
+#theme-toggle {
+    background: transparent;
+    border: 1px solid var(--secondary-text-color);
+    color: var(--secondary-text-color);
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: border-color 0.3s, color 0.3s;
+}
+
+#theme-toggle:hover {
+    border-color: var(--color-accent-purple);
+    color: var(--color-accent-purple);
+}
+
+/*
+|--------------------------------------------------------------------------
+| Hero Section (Main Content) Layout
+|--------------------------------------------------------------------------
+| The core two-column Grid structure for Desktop
+*/
+.hero-section {
+    /* GRID LAYOUT: Main two-column structure for desktop */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "content image"
+        "footer footer";
+    min-height: calc(100vh - 5rem);
+    /* Adjust based on header height */
+    padding: clamp(3rem, 5vw, 6rem) clamp(1rem, 5vw, 4rem) 0;
+}
+
+.hero-content {
+    grid-area: content;
+    align-self: start;
+    /* Align content to the top */
+    padding-right: 3rem;
+}
+
+.hero-content .small-tag {
+    color: var(--color-accent-purple);
+    font-size: var(--subtitle-size);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.hero-content h1 {
+    font-size: var(--h1-size);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+}
+
+.hero-content .highlight {
+    color: var(--color-accent-purple);
+}
+
+.hero-content .subtitle {
+    font-size: var(--subtitle-size);
+    color: var(--secondary-text-color);
+    max-width: 450px;
+    margin-bottom: 3rem;
+}
+.hero-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  height: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.hero-content {
+  max-height: 100%;
+  overflow: auto;
+}
+
+.hero-image-container {
+  max-height: 100%;
+  overflow: hidden;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| NFT Cards Layout
+|--------------------------------------------------------------------------
+| Nested Grid for the three card components
+*/
+.nft-cards {
+    /* GRID LAYOUT: Three equal columns for the cards */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    max-width: 500px;
+    /* Constrain the width as seen in the design */
+}
+
+.card {
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    /* For hover effect */
+}
+
+/* Hover Interaction 2 (Cards) */
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    /* Lift and slight scale */
+    box-shadow: 0 15px 30px rgba(144, 89, 135, 0.3);
+    border-color: var(--color-accent-purple);
+}
+
+.card-image {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+.card h3 {
+    font-size: var(--body-size);
+    margin-bottom: 0.2rem;
+}
+
+.card .artist {
+    font-size: 0.75rem;
+    color: var(--secondary-text-color);
+    margin-bottom: 0.5rem;
+}
+
+.card .price {
+    font-weight: bold;
+    color: var(--color-accent-purple);
+}
+
+.btn-start {
+    background-color: var(--color-accent-purple);
+    color: var(--text-color);
+    padding: 1rem 02rem;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    border: none;
+    display: grid;
+    /* Grid to center 'Start' and the icon */
+    grid-auto-flow: column;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    /* Push to the right, under the cards */
+}
+
+/*
+|--------------------------------------------------------------------------
+| Hero Image and Overlays Layout
+|--------------------------------------------------------------------------
+| Uses CSS Grid for positioning and z-indexing
+*/
+.hero-image-container {
+    grid-area: image;
+    position: relative;
+    /* For absolute positioning of overlays */
+    height: 100%;
+    /* GRID LAYOUT: The container itself is a single cell, but we'll use place-items to position its contents */
+    display: grid;
+    place-items: center;
+}
+
+.hero-image {
+    max-width: 100%;
+    height: auto;
+    max-height: 80vh;
+    opacity: 0.9;
+    z-index: 2;
+}
+
+  .barcode-image {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 160px;
+  height: auto;
+  z-index: 1;
+}
+
+.watermark {
+    position: absolute;
+    top: 50%;
+    right: -20%;
+    transform: translateY(-50%) rotate(-90deg);
+    font-size: clamp(3rem, 15vw, 10rem);
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.05);
+    /* Light opacity for background feel */
+    z-index: 1;
+    pointer-events: none;
+}
+
+.watermark-outline {
+    -webkit-text-stroke: 1px var(--color-accent-purple);
+    color: transparent;
+}
+
+/*
+|--------------------------------------------------------------------------
+| Footer Links Layout
+|--------------------------------------------------------------------------
+| Uses CSS Grid to span the full width
+*/
+.hero-footer-links {
+    grid-area: footer;
+    border-top: 1px solid var(--border-color);
+    padding: 1.5rem 0;
+    margin-top: 3rem;
+    /* GRID LAYOUT: Evenly distributed links */
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    font-size: var(--body-size);
+}
+
+.hero-footer-links a {
+    text-decoration: none;
+    color: var(--secondary-text-color);
+    padding: 0 1rem;
+    text-align: center;
+}
+
+.hero-footer-links .active-link {
+    color: var(--text-color);
+    font-weight: bold;
+    /* Simulate the underline/arrow from the design */
+    position: relative;
+}
+
+.hero-footer-links .active-link::after {
+    content: '↑';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+    color: var(--color-accent-purple);
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.stone-image {
+  transform: scale(3);
+    width: 80px;
+  display: block;
+  margin: 5rem auto 0;
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Responsive Design (CSS Grid + Media Queries)
+|--------------------------------------------------------------------------
+*/
+
+/* Mobile View (Below ~768px) */
+@media (max-width: 768px) {
+
+    /* Header Adaptations */
+    .main-header {
+        grid-template-columns: auto auto;
+        /* Logo and Buttons only */
+        grid-template-areas: "logo buttons";
+    }
+
+    .logo {
+        grid-area: logo;
+    }
+
+    .nav-menu {
+        display: none;
+        /* Hide main nav menu on small screens for simplicity */
+    }
+
+    .auth-buttons {
+        grid-area: buttons;
+    }
+
+    /* Hero Section Adaptations (Stacked Layout) */
+    .hero-section {
+        /* GRID LAYOUT: Single column stack for mobile */
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "image"
+            "content"
+            "footer";
+        padding-top: 1rem;
+        min-height: auto;
+    }
+
+    .hero-content {
+        padding-right: 0;
+        margin-top: 2rem;
+    }
+
+    .hero-image-container {
+        /* Move the large image to the top */
+        order: -1;
+        margin-bottom: 2rem;
+    }
+
+    /* NFT Cards Adaptation */
+    .nft-cards {
+        /* GRID LAYOUT: Single column or two columns for smaller space */
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 100%;
+        /* Use full width */
+    }
+
+    /* Re-center the start button */
+    .btn-start {
+        margin-left: 0;
+        justify-self: center;
+    }
+
+    /* Footer Links Adaptation */
+    .hero-footer-links {
+        /* GRID LAYOUT: Stack links in a single column */
+        grid-auto-flow: row;
+        gap: 1rem;
+        justify-content: start;
+        text-align: left;
+    }
+
+    .hero-footer-links .active-link::after {
+        display: none;
+        /* Hide the arrow on mobile */
+    }
+
+    .watermark {
+        right: 0;
+        font-size: 20vw;
+    }
+}
+
+/* Tablet View (Between 768px and 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .nav-menu {
+        gap: 1rem;
+        /* Reduce gap to fit in tablet screens */
+    }
+
+    .hero-section {
+        /* GRID LAYOUT: Maintain 2 columns, but adjust padding */
+        padding: 3rem 2rem 0;
+    }
+
+    .hero-content {
+        padding-right: 1rem;
+    }
+
+    .nft-cards {
+        /* Keep 3 columns, but slightly tighter */
+        gap: 1rem;
+    }
+
+    .watermark {
+        right: -10%;
+    }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| The Class that took the longest to get right: .hero-section
+|--------------------------------------------------------------------------
+|
+| The .hero-section class was the toughest because it needed to serve three functions 
+| using *only* CSS Grid and media queries:
+| 1. The main 2-column layout ("content" and "image") for desktop.
+| 2. The full-width placement of the "footer" at the bottom of the grid area,
+|    spanning both columns (`grid-area: footer / footer`).
+| 3. The complete re-stacking of the layout for mobile (`grid-template-areas: "image" "content" "footer"`),
+|    which required careful mapping of all three areas while also ensuring the content
+|    and image areas behaved correctly at different heights.
+*/

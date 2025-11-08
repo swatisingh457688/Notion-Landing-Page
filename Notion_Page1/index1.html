@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> NFT Landing Page</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="logo">
+             <img src="./assets/star.png" alt="Star icon" class="icon">
+            <span>VULTURE</span>
+        </div>
+        <nav class="nav-menu">
+            <a href="#">Home</a>
+            <a href="#">Marketplace</a>
+            <a href="#">Artist</a>
+            <a href="#">Community</a>
+        </nav>
+        <div class="auth-buttons">
+            <button class="btn btn-signup">Sign Up</button>
+            <button class="btn btn-login">Login</button>
+            <button id="theme-toggle" aria-label="Toggle Dark/Light Mode" tabindex="0">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+    </header>
+
+    <main class="hero-section">
+        <div class="hero-content">
+            <p class="small-tag">Unlock</p>
+            <h1>The Digital <br><span class="highlight">Renaissance</span></h1>
+            <p class="subtitle">Join the revolution, embrace the digital revolution, and become a part of the
+                ever-evolving NFT ecosystem.</p>
+
+            <section class="nft-cards">
+                <article class="card bear-card" tabindex="0">
+                    <img src="./assets/beer.png" alt="A black bear NFT"
+                        class="card-image">
+                    <h3>Bear</h3>
+                    <p class="artist">by Ayden Shore</p>
+                    <p class="price">40$</p>
+                </article>
+
+                <article class="card lion-card" tabindex="0">
+                    <img src="./assets/Lion.png" alt="A golden lion NFT"
+                        class="card-image">
+                    <h3>Lion</h3>
+                    <p class="artist">by Ryan York</p>
+                    <p class="price">80$</p>
+                </article>
+
+                <article class="card cats-card" tabindex="0">
+                    <img src="./assets/Cat.png" alt="A group of cats NFT"
+                        class="card-image">
+                    <h3>Cats</h3>
+                    <p class="artist">by Misha Ross</p>
+                    <p class="price">120$</p>
+                </article>
+            </section>
+
+            <button class="btn btn-start" aria-label="Start the revolution">
+                Start <i class="fas fa-angle-right"></i>
+            </button>
+        </div>
+
+        <div class="hero-image-container">
+    <img src="./assets/stone.png" alt="Stone image above hand" class="stone-image">
+    <img src="./assets/hero-removebg-preview.png" alt="A fractured stone hand holding a rock" class="hero-image">
+    <img src="./assets/barcode.png" alt="Barcode image" class="barcode-image">
+    <div class="watermark">VULTURE <span class="watermark-outline">ART</span></div>
+</div>
+
+        
+        <footer class="hero-footer-links">
+    <a href="#" class="active-link">
+        <img src="./assets/star.png" alt="Star icon" class="icon"> Join the Revolution
+    </a>
+    <a href="#">
+        <img src="./assets/star.png" alt="Star icon" class="icon"> Future Is Here
+    </a>
+    <a href="#">
+        <img src="./assets/star.png" alt="Star icon" class="icon"> NFT World
+    </a>
+    <a href="#">
+        <img src="./assets/star.png" alt="Star icon" class="icon"> Rule the Game
+    </a>
+    <a href="#">
+        <img src="./assets/star.png" alt="Star icon" class="icon"> We Are NFT
+    </a>
+       </footer>
+</main>
+
+    <script>
+        document.getElementById('theme-toggle').addEventListener('click', function () {
+            document.body.classList.toggle('dark-mode');
+            const icon = this.querySelector('i');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.className = 'fas fa-moon';
+            } else {
+                icon.className = 'fas fa-sun';
+            }
+        });
+        // Keyboard Accessibility for Toggle
+        document.getElementById('theme-toggle').addEventListener('keypress', function (e) {
+            if (e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                this.click();
+            }
+        });
+    </script>
+</body>
+
+</html>
